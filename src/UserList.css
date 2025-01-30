@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+}
+
+.userList form {
+    max-width: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 20px auto;
+}
+
+.userList form input,
+.userList form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.userList form button {
+    padding: 10px 25px;
+    margin-top: 10px;
+    background-color: #282c34;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.userList form button:hover {
+    background-color: #61dafb;
+}
+
+.userList .list {
+    max-width: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 20px auto;
+}
+
+.userList .list .userItem {
+    border: 1px solid #282c34;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    border-bottom: 1px solid #282c34;  
+}
+
+.userList .list .userItem:hover {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
