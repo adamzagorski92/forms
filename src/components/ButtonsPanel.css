@@ -1,0 +1,20 @@
+.buttonsPanel {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttonsPanel button {
+    margin: 5px 5px;
+    padding: 10px 25px;
+    background-color: #282c34;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+.buttonsPanel button:hover {
+    background-color: #61dafb;
+}

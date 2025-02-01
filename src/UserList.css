@@ -43,6 +43,8 @@
 
 .userList .list .userItem {
     border: 1px solid #282c34;
+    border-radius: 5px;
+    margin: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,4 +56,11 @@
     background-color: red;
     color: white;
     cursor: pointer;
+}
+
+.userList form .password-container .info-box {
+text-align: left;
+font-size: 0.9rem;
+padding: 0 0 20px;
+opacity: 0.6;
 }

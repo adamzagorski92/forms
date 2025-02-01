@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ButtonsPanel from './components/ButtonsPanel';
 import './UserList.css';
 
 const UserList = () => {
@@ -11,7 +12,10 @@ const UserList = () => {
     });
 
     const [users, setUsers] = useState([]);
+    const [userOfType, setUserOfType] = useState([]);
+    const [filter, setFilter] = useState("all");
     
+
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -25,15 +29,44 @@ const UserList = () => {
         );
     };
 
+    const updateFilter = (action) => {
+        setFilter(action);
+        if (action === "admin") {
+            setUserOfType(users.filter(user => user.usertype === "Admin"));
+        } else if (action === "user") {
+            setUserOfType(users.filter(user => user.usertype === "User"));
+        }else if (action === "guest") {
+            setUserOfType(users.filter(user => user.usertype === "Guest"));
+        }
+         else {
+            setUserOfType(users);
+        };
+    };
+
+    useEffect(() => {
+        if (filter === "all") {
+            setUserOfType(users);
+        } else if (filter === "admin") {
+            setUserOfType(users.filter(user => user.usertype === "Admin"));
+        } else if (filter === "user") {
+            setUserOfType(users.filter(user => user.usertype === "User"));
+        } else if (filter === "guest") {
+            setUserOfType(users.filter(user => user.usertype === "Guest"));
+        }
+    }, [users, filter]);
+    
+
+
     const setUser = (e) => {
         e.preventDefault();
-        setUsers(users.concat({ ...formData, id: Date.now() }))
+        setUsers(prevUsers => [...prevUsers, { ...formData, id: Date.now() }]);
     };
 
     const removeUser = (id) => {
-        const filterdUsers = users.filter(user => user.id !== id);
-        setUsers(filterdUsers);
+        const filteredUsers = users.filter(user => user.id !== id);
+        setUsers(filteredUsers);
     };
+
 
 
     console.log(users);
@@ -41,28 +74,30 @@ const UserList = () => {
     return (<div className="userList">
         <form onSubmit={setUser}>
             <label htmlFor="username">User Name</label>
-            <input type="text" name="username" id="username" placeholder="User name" onChange={handleInputChange} value={formData.username} />
+            <input type="text" name="username" id="username" placeholder="User name" required onChange={handleInputChange} value={formData.username} />
             <label htmlFor="email"> User e-mail</label>
-            <input type="email" name="email" id="email" placeholder="User e-mail" onChange={handleInputChange} value={formData.email} />
+            <input type="email" name="email" id="email" placeholder="User e-mail" required onChange={handleInputChange} value={formData.email} />
             <label htmlFor="usertype">User Type</label>
-            <select name="usertype" id="usertype" onChange={handleInputChange}>
+            <select name="usertype" id="usertype" required onChange={handleInputChange}>
                 <option value="Admin">Admin</option>
                 <option value="User">User</option>
                 <option value="Guest">Guest</option>
             </select>
             <div className='password-container'>
-            <label htmlFor="password"></label>
-            <input type="password" name='password' id='password' placeholder='Wpisz hasło' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onChange={handleInputChange} />
-            <div className='info-box'>{/* {error && <p style={{ color: "red" }}>{error}</p>} */}</div>
+                <label htmlFor="password">Password</label>
+                <input type="password" name='password' id='password' placeholder='Wpisz hasło' required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onChange={handleInputChange} />
+                <div className='info-box'>Hasło musi zawierać co najmniej 8 znaków, cyfrę, małą i wielką literę</div>
             </div>
-            <button>Save</button>
+            <button>Add User</button>
         </form>
 
         <div className='list'>
+            <h2>User List</h2>
 
-            {users.map(user => {
+            <ButtonsPanel updateFilter={updateFilter} />
+            {userOfType.map(user => {
                 return (
-                    <div className='userItem' key={user.id} onClick={()=>removeUser(user.id)}>
+                    <div className='userItem' key={user.id} onClick={() => removeUser(user.id)}>
                         <p><strong>User Name:</strong> {user.username}</p>
                         <p><strong>User Email:</strong> {user.email}</p>
                         <p><strong>User Type:</strong> {user.usertype}</p>
@@ -70,6 +105,7 @@ const UserList = () => {
                     </div>
                 );
             })}
+
 
 
         </div>
