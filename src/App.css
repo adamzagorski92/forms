@@ -1,5 +1,12 @@
 .App {
+  min-height: 100vh;
+  height: 100%;
   text-align: center;
+  background-color: pink;
+  background-image: url(./assets/scattered-pink-watercolor.jpg);
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: 100% auto;
 }
 
 .App-logo {

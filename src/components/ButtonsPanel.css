@@ -1,7 +1,9 @@
 .buttonsPanel {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
+    margin: auto;
 }
 
 .buttonsPanel button {
@@ -14,7 +16,14 @@
     border: 0;
     border-radius: 5px;
     font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-basis: 45%;
 }
+
 .buttonsPanel button:hover {
-    background-color: #61dafb;
+    background-color: pink;
+    color: #282c34;
 }
