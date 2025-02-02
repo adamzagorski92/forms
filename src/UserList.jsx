@@ -75,11 +75,11 @@ const UserList = () => {
     return (
         <div className="userList">
             <form onSubmit={setUser}>
-                <label htmlFor="username">User Name</label>
+                <label htmlFor="username">User name</label>
                 <input type="text" name="username" id="username" placeholder="User name" required onChange={handleInputChange} value={formData.username} />
                 <label htmlFor="email"> User e-mail</label>
                 <input type="email" name="email" id="email" placeholder="User e-mail" required onChange={handleInputChange} value={formData.email} />
-                <label htmlFor="usertype">User Type</label>
+                <label htmlFor="usertype">User type</label>
                 <select name="usertype" id="usertype" required onChange={handleInputChange}>
                     <option value="Admin">Admin</option>
                     <option value="User">User</option>
